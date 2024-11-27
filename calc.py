@@ -55,7 +55,40 @@ def orth_diagonalizable(matrix):
     
 
 def Gram_Schmidt(matrix, size):
-    print("incomplete for now")
+    matrix = Matrix(matrix)
+    if(size ==2):
+        v1 = matrix[:, 0]
+        v2 = matrix[:, 1]
+        u1 = v1 
+        u2 = v2 - (v2.dot(u1) / u1.dot(u1)) * u1
+
+        e1 = u1 / u1.norm()
+        e2 = u2 / u2.norm()
+        e1= e1
+        e2= e2
+        orthonormal_matrix = Matrix.hstack(e1, e2)
+        orthonormal_matrix = orthonormal_matrix.tolist()
+        return orthonormal_matrix
+    else:
+        v1 = matrix[:, 0]
+        v2 = matrix[:, 1]
+        v3 = matrix[:, 2]
+        
+        u1 = v1
+        e1 = u1 / u1.norm()
+        u2 = v2
+        u3= v3 - (v3.dot(u2) / u2.dot(u2)) * u2
+        e2 = u2 / u2.norm()
+        e3 = u3 / u3.norm()
+        print(e1)
+        print(e2)
+        print(e3)
+        orthonormal_matrix = Matrix.hstack(e1, e2, e3)
+        orthonormal_matrix = orthonormal_matrix.tolist()
+        return orthonormal_matrix
+
+    
+
 def main():
     while True:
         try:
@@ -70,12 +103,22 @@ def main():
     matrix = input_matrix(size)
     print("A = ")
     print_matrix(matrix)
-    diagonalize(matrix, size)
+    P, D =diagonalize(matrix, size)
     if(orth_diagonalizable(matrix) == False):
         print("A is not orthogonally diagonalizable")
     else:
         print("A is orthogonally diagonalizable")
         print()
+        Gram_Schmidt(matrix, size)
+        Q=Gram_Schmidt(matrix, size)
+        print()
+        print("Q = ")
+        print_matrix(Q)
+        print()
+        print("D = ") 
+        print_matrix(D)
+
+
 
     
 
