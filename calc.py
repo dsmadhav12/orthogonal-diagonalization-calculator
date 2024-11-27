@@ -55,7 +55,7 @@ def orth_diagonalizable(matrix):
     
 
 def Gram_Schmidt(matrix, size):
-    print("finish tmr")
+    print("incomplete for now")
 def main():
     while True:
         try:
