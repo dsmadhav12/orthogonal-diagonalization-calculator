@@ -80,9 +80,6 @@ def Gram_Schmidt(matrix, size):
         u3= v3 - (v3.dot(u2) / u2.dot(u2)) * u2
         e2 = u2 / u2.norm()
         e3 = u3 / u3.norm()
-        print(e1)
-        print(e2)
-        print(e3)
         orthonormal_matrix = Matrix.hstack(e1, e2, e3)
         orthonormal_matrix = orthonormal_matrix.tolist()
         return orthonormal_matrix
@@ -101,6 +98,7 @@ def main():
             print("Invalid input. Please enter a number (2 or 3).")
     
     matrix = input_matrix(size)
+    print()
     print("A = ")
     print_matrix(matrix)
     P, D =diagonalize(matrix, size)
@@ -109,15 +107,21 @@ def main():
     else:
         print("A is orthogonally diagonalizable")
         print()
-        Gram_Schmidt(matrix, size)
-        Q=Gram_Schmidt(matrix, size)
+        Gram_Schmidt(P, size)
+        Q=Gram_Schmidt(P, size)
         print()
         print("Q = ")
         print_matrix(Q)
         print()
         print("D = ") 
         print_matrix(D)
-
+        Q=Matrix(Q)
+        D=Matrix(D)
+        QT=Q.T
+        Proof=Q*D*QT
+        Proof = Proof.tolist()
+        print("Proof of Q*D*Q^T: ")
+        print_matrix(Proof)
 
 
     
